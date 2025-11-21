@@ -9,22 +9,22 @@ system ? builtins.currentSystem
 }:
 let
   shaMap = {
-    x86_64-linux = "0ps625ryaxay0gsp252xnv6dczk8wp8bplnvxy57m1fy7fnvz474";
-    aarch64-linux = "098cq05kh3brba2201zc3a8m7vfd0sigsvr96ppq1s620fix7dd5";
-    x86_64-darwin = "1i7gm0kbhq2704316iyz7rw6ayy2528vjjx0531kby3rmmiv999z";
-    aarch64-darwin = "1rvqvl2wapnsnnr8r35gj3f078n0c98gyp3i0ifimdnb1c6kk4sm";
+    x86_64-linux = "0akpsyn3c6qfzlmxj8nlw5khwxcjccacmhalajnxa63n79xhiq2m";
+    aarch64-linux = "0csfz2vfh5mmys05blldjvrs588sc9qp7gw8q8d1ajkr8j49pihj";
+    x86_64-darwin = "0ki7jrha2aig37gfrn8rq1rpz1i6d1lf4ald4lzm4vgcqz5yi8a0";
+    aarch64-darwin = "1k15hvc04cj3r58f3z8qqis8l5laz8jl2gy6wfvb48yqj3k73x7a";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.8.5/https-wrench_0.8.5_Linux_x86_64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.8.5/https-wrench_0.8.5_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.8.5/https-wrench_0.8.5_Darwin_x86_64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.8.5/https-wrench_0.8.5_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.8.6/https-wrench_0.8.6_Linux_x86_64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.8.6/https-wrench_0.8.6_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.8.6/https-wrench_0.8.6_Darwin_x86_64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.8.6/https-wrench_0.8.6_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "https-wrench";
-  version = "0.8.5";
+  version = "0.8.6";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
@@ -37,6 +37,13 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/bin
     cp -vr ./https-wrench $out/bin/https-wrench
+    installManPage ./manpages/https-wrench.1.gz
+    installManPage ./manpages/https-wrench-certinfo.1.gz
+    installManPage ./manpages/https-wrench-requests.1.gz
+    installShellCompletion --cmd https-wrench \
+    --bash <($out/bin/https-wrench completion bash) \
+    --fish <($out/bin/https-wrench completion fish) \
+    --zsh <($out/bin/https-wrench completion zsh)
   '';
 
   system = system;
