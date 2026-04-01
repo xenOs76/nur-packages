@@ -14,4 +14,5 @@
   example-package = pkgs.callPackage ./pkgs/example-package {};
   https-wrench = pkgs.callPackage ./pkgs/https-wrench {};
   kubectl-netshoot = pkgs.callPackage ./pkgs/kubectl-netshoot {};
+  kubectl-netdrill = pkgs.callPackage ./pkgs/kubectl-netdrill {};
 }
