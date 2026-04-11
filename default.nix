@@ -16,4 +16,5 @@
   kubectl-netshoot = pkgs.callPackage ./pkgs/kubectl-netshoot {};
   kubectl-netdrill = pkgs.callPackage ./pkgs/kubectl-netdrill {};
   kubectl-crdlist = pkgs.callPackage ./pkgs/kubectl-crdlist {};
+  aws-probe = pkgs.callPackage ./pkgs/aws-probe {};
 }
