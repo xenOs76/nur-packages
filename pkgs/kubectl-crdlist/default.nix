@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "1a2vq149lwv07cshzf93gx4ik9wrkh9qwvm4bpifmzil3hyfbnf0";
-    aarch64-linux = "1hv9n20hrsyq13rm6gx7mca92dxj6hbwpccln2f9grvbzm4i4dd6";
-    x86_64-darwin = "17sl1d8wda782739fw5jk90pi1mvvnmpa5zrqkpwlis731fm914y";
-    aarch64-darwin = "0i1pfdv1knljnk04r0qm31sva6b05r6062x5snxcpag04mkvr4dx";
+    x86_64-linux = "08kj8mh0699myc5gc5gqa9j64n31r401gr21ch3pizr80mfas6gx";
+    aarch64-linux = "0biiflf3qfrv4ilxa8bhg97w6nppivhjwbks5s2a8fjm3j35j3dz";
+    x86_64-darwin = "0qbh1ilyqcn05fg7bv60g8wwxjrcpbshhws0mkrkn3qk8mhmzq45";
+    aarch64-darwin = "05kjc16x4abdslz0gzpwk4pf9v9g0fwsmkghz7k92dw1a8lkjgg2";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.1.2/kubectl-crdlist_0.1.2_Linux_amd64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.1.2/kubectl-crdlist_0.1.2_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.1.2/kubectl-crdlist_0.1.2_Darwin_amd64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.1.2/kubectl-crdlist_0.1.2_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.2.0/kubectl-crdlist_0.2.0_Linux_amd64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.2.0/kubectl-crdlist_0.2.0_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.2.0/kubectl-crdlist_0.2.0_Darwin_amd64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/kubectl-crdlist/releases/download/0.2.0/kubectl-crdlist_0.2.0_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "kubectl-crdlist";
-  version = "0.1.2";
+  version = "0.2.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
