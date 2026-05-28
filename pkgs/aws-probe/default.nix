@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "0884srly0c6294gjcd7byb770rqf6y48xxgybk7g3sw7mv9q1mdm";
-    aarch64-linux = "1ijh12ch8q8gwhc33x6z29kbb81rh8gw60ym2ak27zbj66xwafip";
-    x86_64-darwin = "1jxqpnqq018a180cxmskpyzri5g67j33nm71x04w0m1mbdpcy6ba";
-    aarch64-darwin = "13zn0wri5n2brh5y74hg430zv3l176b7g7m1zwz4wgma366cjpa6";
+    x86_64-linux = "1zsaw27p3xfnp7d292rf6jk7dcjay2812rkxs7jd57hnzpn8nxql";
+    aarch64-linux = "02kykv3ry8pibqh2lpbz622kvfm4bsh6hg0bcsys6qa2kalhdna5";
+    x86_64-darwin = "1zr9bgwy41fn76rj7s9k41b5hjrc9cz5xkgm0cc0a52sc0661fjg";
+    aarch64-darwin = "1wv6hv86md3zgcrpq60vdp7kybj0dywq3m4y4kndwgwa0q6h13xq";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.1.2/aws-probe_0.1.2_Linux_amd64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.1.2/aws-probe_0.1.2_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.1.2/aws-probe_0.1.2_Darwin_amd64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.1.2/aws-probe_0.1.2_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Linux_amd64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Darwin_amd64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "aws-probe";
-  version = "0.1.2";
+  version = "0.1.3";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
@@ -37,6 +37,10 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/bin
     cp -vr ./aws-probe $out/bin/aws-probe
+    installShellCompletion --cmd aws-probe \
+    --bash <($out/bin/aws-probe completion bash) \
+    --fish <($out/bin/aws-probe completion fish) \
+    --zsh <($out/bin/aws-probe completion zsh)
   '';
 
   meta = {
