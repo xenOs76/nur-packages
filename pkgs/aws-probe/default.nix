@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "1zsaw27p3xfnp7d292rf6jk7dcjay2812rkxs7jd57hnzpn8nxql";
-    aarch64-linux = "02kykv3ry8pibqh2lpbz622kvfm4bsh6hg0bcsys6qa2kalhdna5";
-    x86_64-darwin = "1zr9bgwy41fn76rj7s9k41b5hjrc9cz5xkgm0cc0a52sc0661fjg";
-    aarch64-darwin = "1wv6hv86md3zgcrpq60vdp7kybj0dywq3m4y4kndwgwa0q6h13xq";
+    x86_64-linux = "1wjqizwss2lcxll1kc5lvxfjx72gvgnv22b1y3gdg1hxdwmyszvs";
+    aarch64-linux = "1b8wpj0bnpf6xjhnma6dmw3p5srb5gwkr915pz981zhm26i26zbg";
+    x86_64-darwin = "0shb116g8cl1hyp297g5622rrlczr7w8vpn3db8l5byvhpv147g2";
+    aarch64-darwin = "1jxfcd35inglqjcj2wlj3xlj2ajd73p5k95ykjr99dlxr4danwdj";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Linux_amd64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Darwin_amd64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.1.3/aws-probe_0.1.3_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.2.0/aws-probe_0.2.0_Linux_amd64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/aws-probe/releases/download/0.2.0/aws-probe_0.2.0_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.2.0/aws-probe_0.2.0_Darwin_amd64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/aws-probe/releases/download/0.2.0/aws-probe_0.2.0_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "aws-probe";
-  version = "0.1.3";
+  version = "0.2.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
