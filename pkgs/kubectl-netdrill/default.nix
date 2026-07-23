@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "18f0nx36rbzbzcw18flzjrfz5r9ady76jn6fmkx9npvy044bv0jy";
-    aarch64-linux = "1gc18fzyhjm4y4439rjaay13688ilyrp4irg43mzj5q6nj07k99m";
-    x86_64-darwin = "0j369xwgdi7hka8j2xfpvgm91zfqwirmqkka4bynysnh7ccqa0s7";
-    aarch64-darwin = "045vi1hxdzqbl82ax2vkkkr1k2zdkwg5h4fw48imj1gnzzqas78c";
+    x86_64-linux = "0rqgvgjp5rl7n4629nhz6pkkjqkpmsyk18cijz7l20f3svvrx00q";
+    aarch64-linux = "1b18hxl61xm5a7vjswnabqi2724a8apgn3ybrmmy64wiwwd3ds53";
+    x86_64-darwin = "12iinpp3vd3dlpr139qz6z27jb05n46wc573w9wcjyvcf4hha4xp";
+    aarch64-darwin = "0rbkr0p4inhb5mxf1cypkqd444qjvxkrm8kd7vy7mk760dim9l2d";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.2/kubectl-netdrill_0.2.2_Linux_amd64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.2/kubectl-netdrill_0.2.2_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.2/kubectl-netdrill_0.2.2_Darwin_amd64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.2/kubectl-netdrill_0.2.2_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.3/kubectl-netdrill_0.2.3_Linux_amd64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.3/kubectl-netdrill_0.2.3_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.3/kubectl-netdrill_0.2.3_Darwin_amd64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.3/kubectl-netdrill_0.2.3_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "kubectl-netdrill";
-  version = "0.2.2";
+  version = "0.2.3";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
