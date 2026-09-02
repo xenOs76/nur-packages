@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "0ql7lpamzpv3cgz2rnninywhhp4ky3zlm0ga2hal158zzbxkyhlz";
-    aarch64-linux = "1nzfkbmiabrc9m8m9rwr8v70wlyhsmiyr040h9k5r4i74ihxxj96";
-    x86_64-darwin = "1j2l4cqig9bi4v57i743xk6swr0szkjj11626p1p1yqpgb3xgchm";
-    aarch64-darwin = "1mabif7n6a7qda91h7ym9czhnw9lykmxm32lh3z0sj1x8rp33rfh";
+    x86_64-linux = "0ldr6djps5j2520qglq9jjrvyfq4h71z50f4c1jhnbq9wm1as95k";
+    aarch64-linux = "0k4w4fvikvij0d04q0ld55rggnjcbbc30pwsygbsp8va7sv6sqbz";
+    x86_64-darwin = "0vhc4k3p3sv9l6dgav4w9psj6s19l5v1lm8jmws22wxz2adqsswk";
+    aarch64-darwin = "1l9izwi4md623i1n50m9rliv3pvd086xcjlkby55q4agv98ns1ag";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.14.3/https-wrench_0.14.3_Linux_x86_64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.14.3/https-wrench_0.14.3_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.14.3/https-wrench_0.14.3_Darwin_x86_64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.14.3/https-wrench_0.14.3_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.15.0/https-wrench_0.15.0_Linux_x86_64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.15.0/https-wrench_0.15.0_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.15.0/https-wrench_0.15.0_Darwin_x86_64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.15.0/https-wrench_0.15.0_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "https-wrench";
-  version = "0.14.3";
+  version = "0.15.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
