@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "1nicp1ls2a5ymyj9swncfb23c7i1gag2nkc075j6n6h456vxis6v";
-    aarch64-linux = "1skap72lkg3si4azssm10ljaii63wlpyrgxnfqxs0crky5j2dpbl";
-    x86_64-darwin = "00b6wfhl3fd0238cngsqzixwf7n3vxaln3cicqya20lkjmffj7ky";
-    aarch64-darwin = "1x8l56l86lka7iz17wnz40ykzl0a7cnkzbmzw36zsgagkbfzszc0";
+    x86_64-linux = "01dw0kzdxfl6hm9rqi8yj189a4d5n52wxdgb3y7ipsbyv2v4150m";
+    aarch64-linux = "144c8ja58yq2h7rpwm6qix60jdi0hgvfbd1c626vi45m0mr59lch";
+    x86_64-darwin = "1fdmaw8mvmv6mxbbhzrm2livpf0m2jxmkwh7j7dn28d425k3cqbw";
+    aarch64-darwin = "1nq45fgggvrw6m64rhp8b7piiqm7yh8ik9v4lyvyxd5bqyh9jlyp";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.16.0/https-wrench_0.16.0_Linux_x86_64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.16.0/https-wrench_0.16.0_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.16.0/https-wrench_0.16.0_Darwin_x86_64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.16.0/https-wrench_0.16.0_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.17.0/https-wrench_0.17.0_Linux_x86_64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/https-wrench/releases/download/0.17.0/https-wrench_0.17.0_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.17.0/https-wrench_0.17.0_Darwin_x86_64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/https-wrench/releases/download/0.17.0/https-wrench_0.17.0_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "https-wrench";
-  version = "0.16.0";
+  version = "0.17.0";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
@@ -35,6 +35,7 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [ installShellFiles ];
 
   installPhase = ''
+    runHook preInstall
     mkdir -p $out/bin
     cp -vr ./https-wrench $out/bin/https-wrench
     installManPage manpages/https-wrench.1.gz
@@ -44,6 +45,7 @@ stdenvNoCC.mkDerivation {
     --bash <($out/bin/https-wrench completion bash) \
     --fish <($out/bin/https-wrench completion fish) \
     --zsh <($out/bin/https-wrench completion zsh)
+    runHook postInstall
   '';
 
   meta = {
