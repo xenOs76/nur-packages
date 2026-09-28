@@ -9,22 +9,22 @@
 let
   inherit (stdenvNoCC.hostPlatform) system;
   shaMap = {
-    x86_64-linux = "0b402m59xxna88igpb1gbpn7qm7w4h94mfpywkbyv1dgcrkqbajl";
-    aarch64-linux = "0kjvq6069qwn1nxsirb32wjxmzbjg4sw1zj056pr0ykfpxks5fc3";
-    x86_64-darwin = "1ni2v13i7y6z5ybbbxgv8daii38w1mjv349lj7ai8yqvfky2sc5c";
-    aarch64-darwin = "0xchhc9q2v05bp9x2nibsypjsy5x975ajqm9g5cxanjjfbpjyw81";
+    x86_64-linux = "0ja037v57mmxhx9cmknrda8zw8hvs1lh737cxpbzp2ydm479mmrh";
+    aarch64-linux = "02d8yyhv7wws8x4raalmmvrmpaflnj619f04fpb328h3d2rvvgxw";
+    x86_64-darwin = "1id0i1v7qcm9skq0dmdb0d6f7fpr7b81av1468pfwlk407ssh6ix";
+    aarch64-darwin = "05qhd5lhg3v1nhqn73qwhwhbr2imv1mxcg264rfi85z3inwzvznj";
   };
 
   urlMap = {
-    x86_64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.5/kubectl-netdrill_0.2.5_Linux_amd64.tar.gz";
-    aarch64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.5/kubectl-netdrill_0.2.5_Linux_arm64.tar.gz";
-    x86_64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.5/kubectl-netdrill_0.2.5_Darwin_amd64.tar.gz";
-    aarch64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.5/kubectl-netdrill_0.2.5_Darwin_arm64.tar.gz";
+    x86_64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.6/kubectl-netdrill_0.2.6_Linux_amd64.tar.gz";
+    aarch64-linux = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.6/kubectl-netdrill_0.2.6_Linux_arm64.tar.gz";
+    x86_64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.6/kubectl-netdrill_0.2.6_Darwin_amd64.tar.gz";
+    aarch64-darwin = "https://github.com/xenos76/kubectl-netdrill/releases/download/0.2.6/kubectl-netdrill_0.2.6_Darwin_arm64.tar.gz";
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "kubectl-netdrill";
-  version = "0.2.5";
+  version = "0.2.6";
   src = fetchurl {
     url = urlMap.${system};
     sha256 = shaMap.${system};
@@ -35,6 +35,7 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [ installShellFiles ];
 
   installPhase = ''
+    runHook preInstall
     mkdir -p $out/bin
     cp -vr ./kubectl-netdrill $out/bin/kubectl-netdrill
     installManPage manpages/kubectl-netdrill.1.gz
@@ -46,6 +47,7 @@ stdenvNoCC.mkDerivation {
     --bash <($out/bin/kubectl-netdrill completion bash) \
     --fish <($out/bin/kubectl-netdrill completion fish) \
     --zsh <($out/bin/kubectl-netdrill completion zsh)
+    runHook postInstall
   '';
 
   meta = {
